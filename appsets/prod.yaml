@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: git@github.com:zurrehma/gitops.git
+      repoURL: https://github.com/zurrehma/gitops.git
       revision: main
       directories:
         - path: "apps/*/env/prod"
@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: git@github.com:zurrehma/gitops.git
+        repoURL: https://github.com/zurrehma/gitops.git
         targetRevision: main
         path: '{{.path.path}}'
       destination:
