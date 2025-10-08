@@ -4,24 +4,31 @@ metadata:
   name: infra-prod-appset
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+
   generators:
-  - git:
-      repoURL: https://github.com/zurrehma/gitops.git
-      revision: main
-      directories:
-        - path: "apps/*/env/prod"
+    - git:
+        repoURL: https://github.com/zurrehma/gitops.git
+        revision: main
+        directories:
+          - path: "apps/*/env/prod"
+
   template:
     metadata:
-      name: '{{index .path.segments 1}}-prod'
+      name: '{{ index .path.segments 1 | lower }}-prod'
+
     spec:
       project: default
       source:
         repoURL: https://github.com/zurrehma/gitops.git
         targetRevision: main
-        path: '{{.path.path}}'
+        path: '{{ .path.path }}'
+
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{index .path.segments 1}}'   # rook-ceph, prometheus, etc.
+        namespace: '{{ index .path.segments 1 | lower }}'
+
       syncPolicy:
         automated:
           prune: true
