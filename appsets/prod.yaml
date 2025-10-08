@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra-prod-appset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: git@github.com:zurrehma/gitops.git
+      revision: main
+      directories:
+        - path: "apps/*/env/prod"
+  template:
+    metadata:
+      name: '{{index .path.segments 1}}-prod'
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:zurrehma/gitops.git
+        targetRevision: main
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{index .path.segments 1}}'   # rook-ceph, prometheus, etc.
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=false
