@@ -5,6 +5,5 @@ resources:
 - ../../../base/rook-ceph
 
 patchesStrategicMerge:
-- configmap-patch.yaml
 - patch-crash-collector.yaml
 - patch-replicas.yaml
