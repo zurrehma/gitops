@@ -5,6 +5,6 @@ metadata:
   namespace: rook-ceph
 spec:
   mon:
-    count: 1
+    count: 3
   mgr:
     count: 2
