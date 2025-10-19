@@ -6,4 +6,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 
 resources:
+  - crds.yaml
   - operator.yaml
