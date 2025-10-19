@@ -1,0 +1,32 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: elastic
+spec:
+  version: 8.14.0
+  count: 1
+  elasticsearchRef:
+    name: elastic-prod
+  http:
+    service:
+      spec:
+        type: NodePort
+  podTemplate:
+    spec:
+      nodeSelector:
+        role: elastic
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: elastic
+          effect: NoSchedule
+      containers:
+        - name: kibana
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1Gi
+            limits:
+              cpu: 1
+              memory: 2Gi
