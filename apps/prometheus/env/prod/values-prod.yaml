@@ -1,0 +1,17 @@
+grafana:
+  enabled: true
+  admin:
+    existingSecret: grafana-admin-credentials
+    userKey: admin-user
+    passwordKey: admin-password
+
+  service:
+    type: NodePort
+    nodePort: 32000
+
+  persistence:
+    enabled: true
+    size: 10Gi
+
+  ingress:
+    enabled: false

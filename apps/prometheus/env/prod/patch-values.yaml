@@ -1,0 +1,9 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+spec:
+  source:
+    helm:
+      valueFiles:
+        - apps/prometheus/env/prod/values-prod.yaml
