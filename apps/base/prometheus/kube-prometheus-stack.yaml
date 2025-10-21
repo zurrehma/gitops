@@ -12,6 +12,7 @@ spec:
     helm:
       values: |
         grafana:
+          replicas: 1
           admin:
             existingSecret: grafana-admin-credentials
             userKey: admin-user
