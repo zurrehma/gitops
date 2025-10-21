@@ -10,6 +10,7 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 66.2.0
     helm:
+      skipCrds: true
       values: |
         grafana:
           replicas: 1
