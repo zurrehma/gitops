@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ../../../base/prometheus
 
-patchesStrategicMerge:
-  - patch-values.yaml
+# patchesStrategicMerge:
+#   - patch-values.yaml

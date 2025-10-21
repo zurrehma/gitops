@@ -3,7 +3,6 @@ kind: Application
 metadata:
   name: kube-prometheus-stack
   namespace: argocd
-
 spec:
   project: default
   source:
@@ -11,11 +10,47 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 66.2.0
     helm:
-      valueFiles:
-        - values-prod.yaml   # this will be overridden by your patch
+      values: |
+        grafana:
+          admin:
+            existingSecret: grafana-admin-credentials
+            userKey: admin-user
+            passwordKey: admin-password
+          service:
+            type: NodePort
+            nodePort: 32000
+          persistence:
+            enabled: true
+            size: 10Gi
+          ingress:
+            enabled: false
+
+        prometheus:
+          prometheusSpec:
+            retention: 15d
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 20Gi
+
+        alertmanager:
+          alertmanagerSpec:
+            replicas: 1
+            storage:
+              volumeClaimTemplate:
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 10Gi
+
   destination:
-    server: https://kubernetes.default.svc
     namespace: monitoring
+    server: https://kubernetes.default.svc
+
   syncPolicy:
     automated:
       prune: true
