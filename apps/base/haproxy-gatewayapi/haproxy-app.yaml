@@ -9,11 +9,11 @@ spec:
   source:
     repoURL: https://haproxytech.github.io/helm-charts
     chart: haproxy-gateway
-    targetRevision: 0.6.0   # example – pin version
+    targetRevision: 1.24.0   # example – pin version
     helm:
       releaseName: haproxy-gateway
       skipCrds: true
-      
+
 
   destination:
     server: https://kubernetes.default.svc
