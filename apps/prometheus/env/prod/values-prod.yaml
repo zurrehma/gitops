@@ -1,17 +1,36 @@
 grafana:
-  enabled: true
+  replicas: 1
   admin:
     existingSecret: grafana-admin-credentials
     userKey: admin-user
     passwordKey: admin-password
-
   service:
     type: NodePort
     nodePort: 32000
-
   persistence:
     enabled: true
     size: 10Gi
-
   ingress:
     enabled: false
+
+prometheus:
+  prometheusSpec:
+    retention: 15d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 20Gi
+
+alertmanager:
+  alertmanagerSpec:
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi

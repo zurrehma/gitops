@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: haproxy-gateway
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://haproxytech.github.io/helm-charts
+    chart: haproxy-gateway
+    targetRevision: 0.6.0   # example – pin version
+    helm:
+      releaseName: haproxy-gateway
+      skipCrds: true
+      
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: haproxy-gateway
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
