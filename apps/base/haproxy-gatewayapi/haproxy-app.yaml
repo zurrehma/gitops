@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    epoURL: https://haproxytech.github.io/helm-charts
+    repoURL: https://haproxytech.github.io/helm-charts
     chart: kubernetes-ingress
     targetRevision: "1.47.4"   # example — latest version in repo
     helm:
