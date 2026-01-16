@@ -1,4 +1,7 @@
 controller:
-  replicaCount: 1   
-service:
-  type: NodePort
+  kubernetesGateway:
+    enabled: true
+    gatewayControllerName: haproxy.org/gateway-controller
+  replicaCount: 1 
+  service:
+    type: NodePort
