@@ -6,5 +6,5 @@ metadata:
 spec:
   parentRefs:
     - name: prod-gateway
-      namespace: envoy-gateway
+      namespace: envoy-gateway-system
       sectionName: http
