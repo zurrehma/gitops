@@ -4,6 +4,9 @@ metadata:
   name: prod-apps
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+
   generators:
     - git:
         repoURL: https://github.com/zurrehma/gitops.git
@@ -13,22 +16,22 @@ spec:
 
   template:
     metadata:
-      name: '{{index .path.segments 1}}-prod'
+      name: '{{ index .path.segments 1 }}-prod'
     spec:
       project: default
 
       source:
         repoURL: https://github.com/zurrehma/gitops.git
         targetRevision: main
-        path: 'apps/base/{{index .path.segments 1}}'
+        path: 'apps/base/{{ index .path.segments 1 }}'
         helm:
           skipCrds: true
           valueFiles:
-            - '../../{{index .path.segments 1}}/env/{{index .path.segments 3}}/values.yaml'
+            - '../../{{ index .path.segments 1 }}/env/{{ index .path.segments 3 }}/values.yaml'
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: monitoring   # or template this later
+        namespace: '{{ index .path.segments 1 }}'
 
       syncPolicy:
         automated:
