@@ -3,6 +3,6 @@ kind: Kustomization
 
 helmCharts:
   - name: kube-prometheus-stack
-    path: kube-prometheus-stack
+    chartHome: kube-prometheus-stack
     releaseName: prometheus
     namespace: monitoring
