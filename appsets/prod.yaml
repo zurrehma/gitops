@@ -27,7 +27,7 @@ spec:
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ index .path.segments 1 | lower }}'
+        # namespace: '{{ index .path.segments 1 | lower }}'
 
       syncPolicy:
         automated:
