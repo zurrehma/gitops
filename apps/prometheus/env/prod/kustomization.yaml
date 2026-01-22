@@ -2,7 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - kube-prometheus-stack.yaml
+  - ../../../base/prometheus
 
-# patchesStrategicMerge:
-#   - patch-values.yaml
+helmCharts:
+  - name: kube-prometheus-stack
+    includeCRDs: false
+    valuesFile: values-prod.yaml
