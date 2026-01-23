@@ -26,7 +26,7 @@ spec:
         helm:
           skipCrds: true
           valueFiles:
-            - '../../helm/{{ index .path.segments 2 }}/env/{{ index .path.segments 4 }}/values.yaml'
+            - '../../../helm/{{ index .path.segments 2 }}/env/{{ index .path.segments 4 }}/values.yaml'
 
       destination:
         server: https://kubernetes.default.svc
