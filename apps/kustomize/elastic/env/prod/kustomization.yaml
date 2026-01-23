@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ../../../../base/kustomize/elastic/eck-operator
   - ../../../../base/kustomize/elastic/cluster
+  - namespace.yaml
