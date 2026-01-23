@@ -27,3 +27,10 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ index .path.segments 2 }}-{{ index .path.segments 4 }}'
+      
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
