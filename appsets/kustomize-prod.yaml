@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kustomize-prod-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: https://github.com/zurrehma/gitops.git
+        revision: main
+        directories:
+          - path: apps/*/env/prod
+
+  template:
+    metadata:
+      name: '{{ index .path.segments 1 }}-prod'
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/zurrehma/gitops.git
+        targetRevision: main
+        path: 'apps/base/{{ index .path.segments 1 }}'
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ index .path.segments 1 }}-{{ index .path.segments 3 }}'
