@@ -1,41 +1,33 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: prod-apps
+  name: helm-prod-apps
   namespace: argocd
 spec:
   goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
 
   generators:
     - git:
         repoURL: https://github.com/zurrehma/gitops.git
         revision: main
         directories:
-          - path: apps/*/env/prod
+          - path: apps/helm/*/env/prod
 
   template:
     metadata:
-      name: '{{ index .path.segments 1 }}-prod'
+      name: '{{ index .path.segments 2 }}-prod'
     spec:
       project: default
 
       source:
         repoURL: https://github.com/zurrehma/gitops.git
         targetRevision: main
-        path: 'apps/base/helm/{{ index .path.segments 1 }}'
+        path: 'apps/base/helm/{{ index .path.segments 2 }}'
         helm:
           skipCrds: true
           valueFiles:
-            - '../../{{ index .path.segments 1 }}/env/{{ index .path.segments 3 }}/values.yaml'
+            - '../../helm/{{ index .path.segments 2 }}/env/{{ index .path.segments 4 }}/values.yaml'
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ index .path.segments 1 }}-{{ index .path.segments 3 }}'
-
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
+        namespace: '{{ index .path.segments 2 }}-{{ index .path.segments 4 }}'
