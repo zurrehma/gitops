@@ -23,7 +23,7 @@ spec:
       source:
         repoURL: https://github.com/zurrehma/gitops.git
         targetRevision: main
-        path: 'apps/base/{{ index .path.segments 1 }}'
+        path: 'apps/base/helm/{{ index .path.segments 1 }}'
         helm:
           skipCrds: true
           valueFiles:

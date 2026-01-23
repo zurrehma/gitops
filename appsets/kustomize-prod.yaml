@@ -21,7 +21,7 @@ spec:
       source:
         repoURL: https://github.com/zurrehma/gitops.git
         targetRevision: main
-        path: 'apps/base/{{ index .path.segments 1 }}'
+        path: 'apps/base/kustomize/{{ index .path.segments 1 }}'
 
       destination:
         server: https://kubernetes.default.svc
