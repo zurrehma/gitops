@@ -5,21 +5,13 @@ metadata:
   namespace: argocd
 spec:
   goTemplate: true
-  goTemplateOptions:
-    - missingkey=error
 
-  enerators:
-  - matrix:
-      generators:
-        - git:
-            repoURL: https://github.com/zurrehma/gitops.git
-            revision: main
-            directories:
-              - path: apps/helm/*/env/prod
-
-        - values:
-            files:
-              - path: '{{path}}/values.yaml'
+  generators:
+    - git:
+        repoURL: https://github.com/zurrehma/gitops.git
+        revision: main
+        directories:
+          - path: apps/helm/*/env/prod
 
   template:
     metadata:
@@ -39,8 +31,8 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: >-
-          {{- if .values.namespace -}}
-          {{ .values.namespace }}
+          {{- if eq (index .path.segments 2) "cert-manager" -}}
+          cert-manager
           {{- else -}}
           {{ index .path.segments 2 }}-{{ index .path.segments 4 }}
           {{- end -}}
