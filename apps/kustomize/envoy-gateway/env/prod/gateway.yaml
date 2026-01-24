@@ -5,6 +5,8 @@ metadata:
   namespace: envoy-system-prod
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+    cert-manager.io/cluster-issuer: selfsigned
+    cert-manager.io/common-name: "Hello World!"
 spec:
   gatewayClassName: envoy
   listeners:
