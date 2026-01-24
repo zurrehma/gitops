@@ -7,5 +7,10 @@ resources:
   - namespace.yaml
   
 
-patchesStrategicMerge:
-  - backend-gateway-binding.yaml
+patches:
+  - target:
+      group: gateway.networking.k8s.io
+      version: v1
+      kind: HTTPRoute
+      name: backend
+    path: backend-gateway-binding.yaml
