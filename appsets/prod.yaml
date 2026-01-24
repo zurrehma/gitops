@@ -9,14 +9,16 @@ spec:
     - missingkey=error
 
   generators:
-    - git:
-        repoURL: https://github.com/zurrehma/gitops.git
-        revision: main
-        directories:
-          - path: apps/helm/*/env/prod
-      values:
-        files:
-          - path: values.yaml
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/zurrehma/gitops.git
+              revision: main
+              directories:
+                - path: apps/helm/*/env/prod
+          - values:
+              files:
+                - path: values.yaml
 
   template:
     metadata:
