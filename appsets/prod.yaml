@@ -15,7 +15,12 @@ spec:
 
   template:
     metadata:
-      name: '{{ index .path.segments 2 }}-prod'
+      name: >-
+        {{- if eq (index .path.segments 2) "cert-manager" -}}
+        cert-manager
+        {{- else -}}
+        {{ index .path.segments 2 }}-prod
+        {{- end -}}
     spec:
       project: default
 
