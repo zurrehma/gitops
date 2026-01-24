@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: rook-ceph-operator-config
-  namespace: rook-ceph
-data:
-  ROOK_CSI_ENABLE_CEPHFS: "false"   #Disable CephFS to save resources
-  ROOK_CSI_ENABLE_RBD: "true"
