@@ -8,17 +8,18 @@ spec:
   goTemplateOptions:
     - missingkey=error
 
-  generators:
-    - matrix:
-        generators:
-          - git:
-              repoURL: https://github.com/zurrehma/gitops.git
-              revision: main
-              directories:
-                - path: apps/helm/*/env/prod
-          - values:
-              files:
-                - path: values.yaml
+  enerators:
+  - matrix:
+      generators:
+        - git:
+            repoURL: https://github.com/zurrehma/gitops.git
+            revision: main
+            directories:
+              - path: apps/helm/*/env/prod
+
+        - values:
+            files:
+              - path: '{{path}}/values.yaml'
 
   template:
     metadata:
