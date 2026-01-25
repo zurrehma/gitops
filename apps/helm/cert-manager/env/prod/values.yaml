@@ -8,5 +8,5 @@ config:
 cert-manager:
   installCRDs: true
   extraArgs:
-    - --feature-gates=GatewayAPISupport=true
-    
+    - --feature-gates=ExperimentalGatewayAPISupport=true
+
