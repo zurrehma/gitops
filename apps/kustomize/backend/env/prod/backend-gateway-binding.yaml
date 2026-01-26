@@ -8,4 +8,4 @@ spec:
   parentRefs:
     - name: prod-gateway
       namespace: envoy-system-prod
-      sectionName: http
+      # sectionName: http
