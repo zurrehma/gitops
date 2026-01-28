@@ -13,6 +13,9 @@ kube-prometheus-stack:
       size: 10Gi
 
   prometheus:
+    service:
+      type: NodePort
+      nodePort: 32090
     prometheusSpec:
       retention: 15d
       storageSpec:
