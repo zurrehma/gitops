@@ -5,3 +5,6 @@ namespace: elastic-prod
 resources:
   - ../../../../base/kustomize/elastic/cluster
   - namespace.yaml
+  - elastic-exporter.yaml
+  - elastic-exporter-service.yaml
+  - servicemonitor.yaml

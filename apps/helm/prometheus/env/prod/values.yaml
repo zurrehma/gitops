@@ -18,6 +18,9 @@ kube-prometheus-stack:
       nodePort: 32090
     prometheusSpec:
       retention: 15d
+      serviceMonitorNamespaceSelector:
+        matchNames:
+          - elastic-prod
       storageSpec:
         volumeClaimTemplate:
           spec:
