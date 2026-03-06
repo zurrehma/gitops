@@ -7,7 +7,7 @@ spec:
   version: 8.14.0
   count: 1
   elasticsearchRef:
-    name: elastic-prod
+    name: elastic-prod1
   http:
     service:
       spec:
